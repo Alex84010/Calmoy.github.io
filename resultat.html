@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Résultat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<ul>
+  <li><a href="index.html">Accueil</a></li>
+  <li><a href="moyennes.html">Mes Moyennes</a></li>
+  <li><a class="active" href="resultat.html">Résultat</a></li>
+  <li><a href="#">À propos</a></li>
+</ul>
+
+<div class="container">
+  <h2>Ta moyenne générale</h2>
+  <p id="resultat"></p>
+</div>
+
+<script>
+const donnees = JSON.parse(localStorage.getItem("moyennes"));
+const resultat = document.getElementById("resultat");
+
+if (!donnees) {
+  resultat.textContent = "⚠️ Aucune moyenne trouvée. Va dans la page 'Mes Moyennes' pour les entrer.";
+} else {
+  const notes = Object.values(donnees);
+  const moyenne = (notes.reduce((a, b) => a + b, 0) / notes.length).toFixed(2);
+  resultat.textContent = `Ta moyenne générale est de ${moyenne}/20.`;
+}
+</script>
+
+</body>
+</html>
